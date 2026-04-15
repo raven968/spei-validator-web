@@ -1,0 +1,116 @@
+---
+const plans = [
+  {
+    name: 'Pro',
+    price: '300',
+    description: 'Ideal para negocios con volumen moderado de validaciones.',
+    validations: '400',
+    features: [
+      '400 validaciones SPEI al mes',
+      'Verificación contra Banxico en tiempo real',
+      'Extracción de datos con OCR',
+      'Historial de validaciones',
+      'Soporte prioritario',
+    ],
+    highlighted: false,
+    cta: 'Comenzar con Pro',
+  },
+  {
+    name: 'Business',
+    price: '500',
+    description: 'Para operaciones de alto volumen que requieren máxima capacidad.',
+    validations: '800',
+    features: [
+      '800 validaciones SPEI al mes',
+      'Verificación contra Banxico en tiempo real',
+      'Extracción de datos con OCR',
+      'Historial completo de validaciones',
+      'Exportar historial',
+      'Soporte prioritario 24/7',
+    ],
+    highlighted: true,
+    cta: 'Comenzar con Business',
+  },
+];
+---
+
+<section id="precios" class="py-24 bg-brand-bg">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6">
+
+    <!-- Header -->
+    <div class="text-center mb-16">
+      <span class="text-brand-green text-sm font-semibold uppercase tracking-widest">Precios</span>
+      <h2 class="mt-3 text-3xl sm:text-4xl font-bold text-white">Planes simples y transparentes</h2>
+      <p class="mt-4 text-white/60 text-lg">Sin costos ocultos. Cancela cuando quieras.</p>
+    </div>
+
+    <!-- Cards -->
+    <div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+      {plans.map(plan => (
+        <div class={`relative rounded-2xl p-8 border transition-all hover:scale-[1.02] ${
+          plan.highlighted
+            ? 'bg-brand-green/10 border-brand-green shadow-lg shadow-brand-green/10'
+            : 'bg-brand-surface border-white/10 hover:border-white/20'
+        }`}>
+
+          {plan.highlighted && (
+            <div class="absolute -top-4 left-1/2 -translate-x-1/2">
+              <span class="bg-brand-green text-brand-bg text-xs font-bold px-4 py-1 rounded-full uppercase tracking-wider whitespace-nowrap">
+                Más popular
+              </span>
+            </div>
+          )}
+
+          <!-- Plan name & description -->
+          <div class="mb-6">
+            <h3 class={`text-xl font-bold mb-1 ${plan.highlighted ? 'text-brand-green' : 'text-white'}`}>
+              {plan.name}
+            </h3>
+            <p class="text-white/50 text-sm">{plan.description}</p>
+          </div>
+
+          <!-- Price -->
+          <div class="mb-8">
+            <div class="flex items-baseline gap-1">
+              <span class="text-sm text-white/50">$</span>
+              <span class="text-5xl font-black text-white">{plan.price}</span>
+              <span class="text-white/50 text-sm ml-1">MXN / mes</span>
+            </div>
+            <p class="text-xs text-white/40 mt-1">{plan.validations} validaciones por mes</p>
+          </div>
+
+          <!-- Features -->
+          <ul class="space-y-3 mb-8">
+            {plan.features.map(feature => (
+              <li class="flex items-start gap-3 text-sm">
+                <svg
+                  class={`w-5 h-5 flex-shrink-0 mt-0.5 ${plan.highlighted ? 'text-brand-green' : 'text-brand-blue'}`}
+                  fill="currentColor" viewBox="0 0 20 20"
+                >
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                </svg>
+                <span class="text-white/70">{feature}</span>
+              </li>
+            ))}
+          </ul>
+
+          <!-- CTA -->
+          <a
+            href="#"
+            class={`block w-full text-center font-bold py-3 px-6 rounded-xl transition-all hover:scale-105 active:scale-100 ${
+              plan.highlighted
+                ? 'bg-brand-green text-brand-bg hover:bg-brand-green/90'
+                : 'bg-white/10 text-white hover:bg-white/20 border border-white/20'
+            }`}
+          >
+            {plan.cta}
+          </a>
+        </div>
+      ))}
+    </div>
+
+    <p class="text-center text-white/30 text-sm mt-10">
+      Pagos procesados de forma segura con Stripe · Precios en pesos mexicanos (MXN)
+    </p>
+  </div>
+</section>

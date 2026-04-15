@@ -1,0 +1,223 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const lastUpdated = '14 de abril de 2026';
+---
+
+<Layout
+  title="Términos y Condiciones — SPEI Validator"
+  description="Términos y Condiciones de uso del servicio SPEI Validator."
+>
+  <div class="pt-16">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 py-20">
+
+      <!-- Back link -->
+      <a href="/" class="inline-flex items-center gap-2 text-brand-green text-sm hover:underline mb-8">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M19 12H5M12 19l-7-7 7-7"/>
+        </svg>
+        Regresar al inicio
+      </a>
+
+      <!-- Page header -->
+      <div class="mb-12">
+        <h1 class="text-4xl font-bold text-white">Términos y Condiciones</h1>
+        <p class="mt-2 text-white/40 text-sm">Última actualización: {lastUpdated}</p>
+      </div>
+
+      <!-- Legal content -->
+      <div class="prose prose-invert prose-lg max-w-none
+                  prose-headings:font-bold prose-headings:text-white
+                  prose-h2:text-2xl prose-h2:mt-10 prose-h2:mb-4
+                  prose-h3:text-xl prose-h3:mt-6 prose-h3:mb-3
+                  prose-p:text-white/70 prose-p:leading-relaxed
+                  prose-li:text-white/70
+                  prose-a:text-brand-green prose-a:no-underline hover:prose-a:underline
+                  prose-strong:text-white
+                  prose-hr:border-white/10">
+
+        <p>
+          Los presentes Términos y Condiciones (en adelante, los <strong>"Términos"</strong>) regulan el uso del servicio
+          <strong>SPEI Validator</strong> (en adelante, el <strong>"Servicio"</strong>), operado por
+          <strong>[NOMBRE LEGAL DE LA EMPRESA / PERSONA FÍSICA]</strong>, con domicilio en
+          <strong>[DIRECCIÓN FISCAL COMPLETA]</strong> (en adelante, <strong>"nosotros"</strong> o el <strong>"Titular"</strong>).
+        </p>
+
+        <p>
+          Al registrarse, acceder o utilizar el Servicio, usted (en adelante, el <strong>"Usuario"</strong>) acepta de forma expresa
+          haber leído, comprendido y aceptado estos Términos en su totalidad. Si no está de acuerdo con alguno de ellos,
+          deberá abstenerse de usar el Servicio.
+        </p>
+
+        <h2>1. Descripción del Servicio</h2>
+        <p>
+          SPEI Validator es una aplicación móvil que permite al Usuario verificar la autenticidad de comprobantes de
+          transferencias SPEI mediante dos procesos técnicos:
+        </p>
+        <ul>
+          <li>
+            Análisis de imagen con inteligencia artificial para la extracción automática de datos (monto, banco emisor,
+            banco receptor, clave de rastreo, fecha) y detección de alteraciones visuales.
+          </li>
+          <li>
+            Consulta automatizada al portal público del <strong>Comprobante Electrónico de Pago (CEP)</strong> del
+            Banco de México (Banxico) para confirmar la existencia oficial de la operación.
+          </li>
+        </ul>
+        <p>
+          El Servicio <strong>no es un servicio financiero</strong>, no ejecuta transferencias bancarias y no sustituye
+          la verificación directa con instituciones bancarias.
+        </p>
+
+        <h2>2. Registro y cuenta de Usuario</h2>
+        <p>Para utilizar el Servicio, el Usuario debe:</p>
+        <ul>
+          <li>Ser mayor de edad (18 años o más) conforme a la legislación aplicable.</li>
+          <li>Proporcionar información veraz, actualizada y completa durante el registro.</li>
+          <li>Verificar su dirección de correo electrónico mediante el enlace enviado.</li>
+          <li>Mantener la confidencialidad de sus credenciales de acceso.</li>
+        </ul>
+        <p>
+          El Usuario es responsable de toda actividad realizada desde su cuenta. En caso de uso no autorizado,
+          deberá notificarlo de inmediato al correo
+          <a href="mailto:soporte@speivalidator.com">soporte@speivalidator.com</a>.
+        </p>
+
+        <h2>3. Planes, precios y pagos</h2>
+        <p>
+          El Servicio se ofrece bajo planes de suscripción mensuales con renovación automática. Los precios se expresan
+          en pesos mexicanos (MXN) e incluyen los impuestos aplicables cuando así se indique.
+        </p>
+        <h3>3.1 Planes disponibles</h3>
+        <ul>
+          <li><strong>Plan Pro:</strong> $300 MXN/mes, hasta 400 validaciones por ciclo de facturación.</li>
+          <li><strong>Plan Business:</strong> $500 MXN/mes, hasta 800 validaciones por ciclo de facturación.</li>
+        </ul>
+        <h3>3.2 Procesamiento de pagos</h3>
+        <p>
+          Los pagos se procesan a través de <strong>Stripe, Inc.</strong>, un proveedor externo certificado bajo los
+          estándares PCI-DSS. Nosotros no almacenamos datos de tarjetas bancarias. Al suscribirse, el Usuario acepta
+          los términos y la política de privacidad de Stripe, disponibles en
+          <a href="https://stripe.com/mx/legal" target="_blank" rel="noopener">https://stripe.com/mx/legal</a>.
+        </p>
+        <h3>3.3 Renovación y cancelación</h3>
+        <p>
+          La suscripción se renueva automáticamente cada mes hasta que el Usuario la cancele desde la aplicación.
+          La cancelación surte efecto al finalizar el ciclo de facturación en curso. <strong>No se realizan reembolsos
+          por periodos parciales</strong> salvo que la ley aplicable lo exija.
+        </p>
+        <h3>3.4 Límite de validaciones</h3>
+        <p>
+          El contador de validaciones se reinicia en cada aniversario mensual de la suscripción. Al alcanzar el límite
+          del plan, el Usuario no podrá realizar nuevas validaciones hasta la renovación o actualización de plan.
+        </p>
+
+        <h2>4. Uso aceptable</h2>
+        <p>El Usuario se compromete a:</p>
+        <ul>
+          <li>Utilizar el Servicio únicamente con fines lícitos y conforme a estos Términos.</li>
+          <li>No intentar eludir los límites técnicos, de uso o de facturación del Servicio.</li>
+          <li>No realizar ingeniería inversa, descompilar ni extraer el código fuente de la aplicación.</li>
+          <li>No automatizar el uso del Servicio mediante bots, scripts o herramientas no autorizadas.</li>
+          <li>No cargar imágenes que contengan contenido ilícito, que infrinjan derechos de terceros o que no correspondan a comprobantes SPEI auténticos propios o autorizados.</li>
+          <li>No utilizar el Servicio para encubrir, validar o facilitar operaciones fraudulentas.</li>
+        </ul>
+        <p>
+          El incumplimiento de esta sección podrá resultar en la suspensión o cancelación inmediata de la cuenta,
+          sin derecho a reembolso.
+        </p>
+
+        <h2>5. Propiedad intelectual</h2>
+        <p>
+          Todos los derechos de propiedad intelectual sobre el Servicio, incluyendo su código, diseño, marca,
+          logotipos, textos, imágenes y demás elementos, son propiedad del Titular o de sus licenciantes y están
+          protegidos por las leyes mexicanas e internacionales aplicables.
+        </p>
+        <p>
+          El Usuario recibe una licencia limitada, no exclusiva, intransferible y revocable para usar el Servicio
+          exclusivamente conforme a estos Términos.
+        </p>
+
+        <h2>6. Limitación de responsabilidad</h2>
+        <p>
+          El Servicio se proporciona <strong>"tal cual" y "según disponibilidad"</strong>. No garantizamos que el
+          Servicio esté libre de errores, interrupciones o que los resultados de validación sean absolutamente exactos
+          en todos los casos.
+        </p>
+        <p>
+          <strong>El Usuario entiende y acepta que:</strong>
+        </p>
+        <ul>
+          <li>
+            La verificación contra Banxico depende de la disponibilidad del portal público CEP operado por el
+            Banco de México. El Titular no tiene control sobre dicho portal ni responde por su caída, lentitud o
+            cambios en su funcionamiento.
+          </li>
+          <li>
+            El análisis con inteligencia artificial es una herramienta de apoyo y <strong>no constituye prueba
+            definitiva</strong> de autenticidad o falsedad de un comprobante.
+          </li>
+          <li>
+            La decisión final de aceptar, rechazar o actuar con base en el resultado de una validación es
+            responsabilidad exclusiva del Usuario.
+          </li>
+        </ul>
+        <p>
+          En la máxima medida permitida por la legislación aplicable, el Titular no será responsable de daños
+          indirectos, incidentales, consecuentes, lucro cesante o pérdida de datos derivados del uso o la
+          imposibilidad de uso del Servicio. La responsabilidad total del Titular, en cualquier caso, se limita
+          al monto efectivamente pagado por el Usuario durante los tres (3) meses anteriores al evento que dio
+          origen a la reclamación.
+        </p>
+
+        <h2>7. Suspensión y terminación</h2>
+        <p>
+          Nos reservamos el derecho de suspender o cancelar la cuenta de cualquier Usuario, con o sin previo aviso,
+          en caso de incumplimiento de estos Términos, uso fraudulento, solicitud de autoridad competente o por
+          razones operativas justificadas. El Usuario puede cancelar su cuenta en cualquier momento desde la
+          aplicación.
+        </p>
+
+        <h2>8. Modificaciones a los Términos</h2>
+        <p>
+          Podemos modificar estos Términos en cualquier momento. Las modificaciones se publicarán en esta página
+          con la fecha de actualización correspondiente. Los cambios sustanciales se notificarán al correo
+          electrónico registrado. El uso continuado del Servicio después de la notificación constituye aceptación
+          de los nuevos Términos.
+        </p>
+
+        <h2>9. Protección de datos personales</h2>
+        <p>
+          El tratamiento de datos personales se rige por nuestro
+          <a href="/privacidad">Aviso de Privacidad</a>, que forma parte integral de estos Términos.
+        </p>
+
+        <h2>10. Legislación aplicable y jurisdicción</h2>
+        <p>
+          Estos Términos se rigen por las leyes de los Estados Unidos Mexicanos. Para la interpretación y
+          cumplimiento de los mismos, las partes se someten a la jurisdicción de los tribunales competentes de
+          <strong>[CIUDAD / ESTADO]</strong>, renunciando a cualquier otra que pudiera corresponderles por razón
+          de sus domicilios presentes o futuros.
+        </p>
+
+        <h2>11. Contacto</h2>
+        <p>
+          Para cualquier duda, aclaración o solicitud relacionada con estos Términos, puede contactarnos en:
+        </p>
+        <ul>
+          <li>Correo electrónico: <a href="mailto:soporte@speivalidator.com">soporte@speivalidator.com</a></li>
+          <li>Domicilio: <strong>[DIRECCIÓN FISCAL COMPLETA]</strong></li>
+        </ul>
+
+        <hr />
+
+        <p class="text-sm text-white/40 italic">
+          Los campos marcados entre corchetes <strong>[ASÍ]</strong> deben completarse con la información legal
+          real antes de publicar el sitio. Se recomienda la revisión de este documento por un abogado
+          especializado en derecho digital y protección al consumidor en México.
+        </p>
+
+      </div>
+    </div>
+  </div>
+</Layout>
