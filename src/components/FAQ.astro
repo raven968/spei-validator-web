@@ -1,0 +1,64 @@
+---
+const faqs = [
+  {
+    q: '¿Cómo verifica el sistema con Banxico?',
+    a: 'Consultamos en tiempo real el portal CEP (Comprobante Electrónico de Pago) oficial de Banxico usando los datos extraídos del comprobante. Si el SPEI existe en el registro de Banxico, devolvemos una confirmación verificable.',
+  },
+  {
+    q: '¿Qué bancos están soportados?',
+    a: 'Soportamos +18 bancos mexicanos, incluyendo BBVA, Banorte, Santander, HSBC, Citibanamex, Scotiabank, Inbursa, Banco Azteca, Hey Banco, Nu, Klar y muchos más. La cobertura de Banxico es para todas las transferencias SPEI.',
+  },
+  {
+    q: '¿Mis comprobantes se almacenan?',
+    a: 'Solo guardamos el resultado de la verificación y los metadatos necesarios para tu historial. Las imágenes pueden eliminarse a petición y todo viaja cifrado.',
+  },
+  {
+    q: '¿Funciona si el comprobante es una foto borrosa o torcida?',
+    a: 'Sí. El OCR está construido sobre Gemini Vision, que maneja fotos torcidas, oscuras, parcialmente cortadas o con compresión fuerte. Si un dato no se logra leer, te lo decimos antes de consultar Banxico.',
+  },
+  {
+    q: '¿Tienen API para integrar con mi sistema?',
+    a: 'La API está en plan piloto privado para clientes Business. Si te interesa, escríbenos a soporte@speivalidator.com y te incluimos en la siguiente ola.',
+  },
+  {
+    q: '¿Cómo cancelo mi suscripción?',
+    a: 'Desde la app, en cualquier momento. La cancelación es inmediata y no genera cargos adicionales. Mantienes acceso hasta el final del período pagado.',
+  },
+];
+---
+
+<section id="preguntas" class="relative py-24 sm:py-32">
+  <div class="max-w-3xl mx-auto px-4 sm:px-6">
+
+    <div class="mb-12">
+      <p class="eyebrow">Preguntas frecuentes</p>
+      <h2 class="display-h2 mt-3 text-balance">
+        Lo que la gente nos pregunta antes de subirse.
+      </h2>
+    </div>
+
+    <div class="divide-y divide-brand-line border-y border-brand-line">
+      {faqs.map((faq) => (
+        <details class="group py-5">
+          <summary class="flex items-center justify-between gap-6 cursor-pointer list-none select-none">
+            <span class="font-display font-medium text-lg sm:text-xl text-white">
+              {faq.q}
+            </span>
+            <span
+              aria-hidden="true"
+              class="flex-shrink-0 w-7 h-7 rounded-full border border-brand-line bg-white/[0.02] flex items-center justify-center text-white/60 transition-transform duration-200 group-open:rotate-45 group-open:text-brand-green group-open:border-brand-green/40"
+            >
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                <line x1="12" y1="5" x2="12" y2="19" />
+                <line x1="5" y1="12" x2="19" y2="12" />
+              </svg>
+            </span>
+          </summary>
+          <p class="mt-4 text-white/60 leading-relaxed text-[15px] max-w-prose">
+            {faq.a}
+          </p>
+        </details>
+      ))}
+    </div>
+  </div>
+</section>

@@ -1,0 +1,36 @@
+---
+const bancos = [
+  'BBVA', 'Banorte', 'Santander', 'HSBC', 'Citibanamex', 'Scotiabank',
+  'Inbursa', 'Banco Azteca', 'BanRegio', 'Banco del Bajío', 'Mifel', 'Afirme',
+  'Hey Banco', 'Nu', 'Klar', 'STP', 'Banco Multiva', 'BanCoppel',
+];
+
+// Duplicamos para marquee infinito sin saltos
+const loop = [...bancos, ...bancos];
+---
+
+<section id="bancos" class="relative py-16 sm:py-20 border-y border-brand-line/60 bg-brand-ink/40">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6">
+
+    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-8">
+      <p class="eyebrow">Bancos soportados</p>
+      <p class="font-mono text-[12px] text-white/45">
+        +18 instituciones · cobertura SPEI completa
+      </p>
+    </div>
+
+    <!-- Marquee -->
+    <div
+      class="relative overflow-hidden"
+      style="-webkit-mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%); mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);"
+    >
+      <ul class="flex items-center gap-10 whitespace-nowrap animate-marquee" style="width: max-content;">
+        {loop.map((banco) => (
+          <li class="font-display text-xl sm:text-2xl text-white/45 hover:text-white/80 transition-colors tracking-tight">
+            {banco}
+          </li>
+        ))}
+      </ul>
+    </div>
+  </div>
+</section>

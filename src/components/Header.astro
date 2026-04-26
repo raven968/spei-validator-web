@@ -2,79 +2,121 @@
 const navLinks = [
   { href: '/#como-funciona', label: 'Cómo funciona' },
   { href: '/#precios',       label: 'Precios' },
-  { href: '/#contacto',      label: 'Contacto' },
+  { href: '/#preguntas',     label: 'Preguntas' },
 ];
 ---
 
-<header class="fixed top-0 left-0 right-0 z-50 bg-brand-bg/90 backdrop-blur-md border-b border-white/10">
+<header
+  id="site-header"
+  class="fixed top-0 left-0 right-0 z-50 transition-[border-color,background-color] duration-200 border-b border-transparent"
+>
+  <div class="absolute inset-0 -z-10 bg-brand-ink/70 backdrop-blur-md"></div>
+
   <div class="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
 
-    <!-- Logo -->
-    <a href="/" class="flex items-center gap-3">
-      <img src="/logo.png" alt="SPEI Scan" class="h-8 w-auto" />
-      <span class="font-bold text-lg text-white hidden sm:block">SPEI Scan</span>
+    <!-- Wordmark -->
+    <a href="/" class="flex items-center gap-2.5 group">
+      <img src="/logo.png" alt="" class="h-7 w-auto" />
+      <span class="font-display font-medium text-[17px] tracking-tight text-white">
+        SPEI Scan<span class="text-brand-green">.</span>
+      </span>
     </a>
 
     <!-- Desktop nav -->
-    <nav class="hidden md:flex items-center gap-6">
-      {navLinks.map(link => (
+    <nav class="hidden md:flex items-center gap-8">
+      {navLinks.map((link) => (
         <a
           href={link.href}
-          class="text-sm text-white/70 hover:text-brand-green transition-colors"
+          class="text-sm text-white/55 hover:text-white transition-colors"
         >
           {link.label}
         </a>
       ))}
       <a
         href="/#precios"
-        class="text-sm bg-brand-green text-brand-bg font-semibold px-4 py-2 rounded-lg hover:bg-brand-green/90 transition-colors"
+        class="text-sm font-medium text-white/85 px-3.5 py-1.5 rounded-lg border border-white/10 bg-white/[0.04] hover:bg-white/[0.08] hover:border-white/20 transition-colors"
       >
-        Comenzar
+        Descargar app
       </a>
     </nav>
 
     <!-- Mobile menu button -->
     <button
       id="menu-btn"
-      class="md:hidden p-2 text-white/70 hover:text-white"
+      class="md:hidden p-2 -mr-2 text-white/70 hover:text-white"
       aria-label="Abrir menú"
+      aria-expanded="false"
     >
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-        <line x1="3" y1="6"  x2="21" y2="6"  />
-        <line x1="3" y1="12" x2="21" y2="12" />
-        <line x1="3" y1="18" x2="21" y2="18" />
+      <svg id="icon-open" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+        <line x1="4" y1="7" x2="20" y2="7" />
+        <line x1="4" y1="13" x2="20" y2="13" />
+        <line x1="4" y1="19" x2="20" y2="19" />
+      </svg>
+      <svg id="icon-close" class="hidden" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+        <line x1="6" y1="6" x2="18" y2="18" />
+        <line x1="18" y1="6" x2="6" y2="18" />
       </svg>
     </button>
   </div>
 
-  <!-- Mobile nav -->
-  <div id="mobile-menu" class="hidden md:hidden bg-brand-surface border-t border-white/10 px-4 py-4">
-    <nav class="flex flex-col gap-4">
-      {navLinks.map(link => (
+  <!-- Mobile fullscreen overlay -->
+  <div
+    id="mobile-menu"
+    class="hidden md:hidden fixed inset-0 top-16 bg-brand-ink/95 backdrop-blur-xl"
+  >
+    <nav class="flex flex-col gap-1 px-6 pt-8">
+      {navLinks.map((link) => (
         <a
           href={link.href}
-          class="text-sm text-white/70 hover:text-brand-green transition-colors"
+          class="block py-4 text-2xl font-display font-medium text-white border-b border-brand-line"
         >
           {link.label}
         </a>
       ))}
       <a
         href="/#precios"
-        class="text-sm bg-brand-green text-brand-bg font-semibold px-4 py-2 rounded-lg text-center hover:bg-brand-green/90 transition-colors"
+        class="mt-8 btn-primary w-full"
       >
-        Comenzar
+        Descargar app
       </a>
     </nav>
   </div>
 </header>
 
 <script>
-  const btn  = document.getElementById('menu-btn');
-  const menu = document.getElementById('mobile-menu');
-  btn?.addEventListener('click', () => menu?.classList.toggle('hidden'));
+  const header = document.getElementById('site-header');
+  const onScroll = () => {
+    if (!header) return;
+    if (window.scrollY > 8) {
+      header.classList.add('border-brand-line/80');
+      header.classList.remove('border-transparent');
+    } else {
+      header.classList.add('border-transparent');
+      header.classList.remove('border-brand-line/80');
+    }
+  };
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
 
-  // Close mobile menu when a nav link is clicked
-  menu?.querySelectorAll('a').forEach(link => {
-    link.addEventListener('click', () => menu.classList.add('hidden'));
+  const btn       = document.getElementById('menu-btn');
+  const menu      = document.getElementById('mobile-menu');
+  const iconOpen  = document.getElementById('icon-open');
+  const iconClose = document.getElementById('icon-close');
+
+  const setOpen = (open: boolean) => {
+    if (!btn || !menu || !iconOpen || !iconClose) return;
+    btn.setAttribute('aria-expanded', String(open));
+    menu.classList.toggle('hidden', !open);
+    iconOpen.classList.toggle('hidden', open);
+    iconClose.classList.toggle('hidden', !open);
+    document.body.style.overflow = open ? 'hidden' : '';
+  };
+
+  btn?.addEventListener('click', () => {
+    const isOpen = btn.getAttribute('aria-expanded') === 'true';
+    setOpen(!isOpen);
+  });
+  menu?.querySelectorAll('a').forEach((link) => {
+    link.addEventListener('click', () => setOpen(false));
   });
 </script>

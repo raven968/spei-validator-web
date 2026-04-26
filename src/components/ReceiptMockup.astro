@@ -1,0 +1,88 @@
+---
+const fields = [
+  { label: 'Beneficiario', value: '●●●● García Ramírez', delay: 120 },
+  { label: 'Banco origen', value: 'BBVA México',          delay: 200 },
+  { label: 'Monto',        value: '$ 12,450.00 MXN',      delay: 280 },
+  { label: 'Clave rastreo',value: 'BNET01001-7A29B43F',   delay: 360 },
+  { label: 'Fecha',        value: '24 abr 2026 · 14:08',  delay: 440 },
+];
+---
+
+<div class="relative w-full max-w-md mx-auto lg:mx-0" data-receipt-mockup>
+  <!-- Card fantasma detrás (efecto profundidad) -->
+  <div
+    aria-hidden="true"
+    class="absolute inset-0 translate-x-5 translate-y-5 rounded-2xl border border-brand-line bg-brand-surface/40 opacity-60"
+  ></div>
+
+  <!-- Card principal -->
+  <article
+    class="relative rounded-2xl border border-brand-line bg-brand-surface/90 backdrop-blur-md shadow-card overflow-hidden rotate-[0.6deg]"
+  >
+    <!-- Title bar estilo macOS -->
+    <header class="flex items-center gap-2 px-4 py-3 border-b border-brand-line bg-brand-raised/40">
+      <span class="w-2.5 h-2.5 rounded-full bg-[#FF5F57]"></span>
+      <span class="w-2.5 h-2.5 rounded-full bg-[#FEBC2E]"></span>
+      <span class="w-2.5 h-2.5 rounded-full bg-[#28C840]"></span>
+      <span class="ml-3 font-mono text-[11px] text-white/40 truncate">
+        comprobante-bbva-2026-04.jpg
+      </span>
+    </header>
+
+    <!-- Imagen placeholder -->
+    <div class="px-4 pt-4">
+      <div class="relative h-28 rounded-lg border border-brand-line overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-br from-brand-fog/30 via-brand-bg to-brand-ink"></div>
+        <div class="absolute inset-0 bg-grid opacity-50"></div>
+        <div class="absolute inset-0 flex items-center justify-center">
+          <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" class="text-white/30">
+            <rect x="4" y="3" width="16" height="18" rx="2" />
+            <line x1="8" y1="8"  x2="16" y2="8" />
+            <line x1="8" y1="12" x2="16" y2="12" />
+            <line x1="8" y1="16" x2="13" y2="16" />
+          </svg>
+        </div>
+        <span class="absolute top-2 left-2 font-mono text-[10px] text-white/40 px-1.5 py-0.5 rounded bg-black/30 border border-white/10">
+          IMG · 2.1 MB
+        </span>
+      </div>
+    </div>
+
+    <!-- Campos extraídos -->
+    <ul class="px-4 py-4 space-y-2.5">
+      {fields.map((f) => (
+        <li
+          class="flex items-baseline justify-between gap-3 opacity-0"
+          style={`animation: tick-in 400ms ease-out ${f.delay}ms forwards;`}
+        >
+          <span class="font-mono text-[11px] uppercase tracking-wider text-white/40">{f.label}</span>
+          <span class="font-mono text-sm text-white/90 truncate">{f.value}</span>
+        </li>
+      ))}
+    </ul>
+
+    <!-- Separador -->
+    <div class="mx-4 h-px bg-brand-line"></div>
+
+    <!-- Sello verificado -->
+    <footer
+      class="flex items-center justify-between gap-3 px-4 py-4 opacity-0"
+      style="animation: tick-in 500ms ease-out 600ms forwards;"
+    >
+      <div class="flex items-center gap-3">
+        <span class="relative flex items-center justify-center w-8 h-8 rounded-full bg-brand-green/15 text-brand-green animate-pulse-ring">
+          <svg width="16" height="16" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+          </svg>
+        </span>
+        <div class="flex flex-col leading-tight">
+          <span class="text-sm text-white">Verificado en Banxico</span>
+          <span class="font-mono text-[11px] text-white/40">CEP confirmado · 1.24s</span>
+        </div>
+      </div>
+      <span class="font-mono text-[10px] uppercase tracking-wider px-2 py-1 rounded-md border border-brand-green/30 text-brand-green bg-brand-green/5">
+        CEP ✓
+      </span>
+    </footer>
+  </article>
+</div>
