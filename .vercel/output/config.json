@@ -1,0 +1,79 @@
+{
+	"version": 3,
+	"routes": [
+		{
+			"src": "^/_astro/(.*)$",
+			"headers": {
+				"cache-control": "public, max-age=31536000, immutable"
+			},
+			"continue": true
+		},
+		{
+			"handle": "filesystem"
+		},
+		{
+			"src": "^\\/_image$",
+			"dest": "_render"
+		},
+		{
+			"src": "^\\/api\\/logout\\/?$",
+			"dest": "_render"
+		},
+		{
+			"src": "^\\/api\\/subscription\\/cancel\\/?$",
+			"dest": "_render"
+		},
+		{
+			"src": "^\\/api\\/subscription\\/checkout\\/?$",
+			"dest": "_render"
+		},
+		{
+			"src": "^\\/api\\/subscription\\/portal\\/?$",
+			"dest": "_render"
+		},
+		{
+			"src": "^\\/api\\/subscription\\/resume\\/?$",
+			"dest": "_render"
+		},
+		{
+			"src": "^\\/auto-login\\/?$",
+			"dest": "_render"
+		},
+		{
+			"src": "^\\/checkout\\/cancel\\/?$",
+			"dest": "_render"
+		},
+		{
+			"src": "^\\/checkout\\/success\\/?$",
+			"dest": "_render"
+		},
+		{
+			"src": "^\\/checkout\\/?$",
+			"dest": "_render"
+		},
+		{
+			"src": "^\\/cuenta\\/?$",
+			"dest": "_render"
+		},
+		{
+			"src": "^\\/login\\/?$",
+			"dest": "_render"
+		},
+		{
+			"src": "^\\/privacidad\\/?$",
+			"dest": "_render"
+		},
+		{
+			"src": "^\\/registro\\/?$",
+			"dest": "_render"
+		},
+		{
+			"src": "^\\/terminos\\/?$",
+			"dest": "_render"
+		},
+		{
+			"src": "^\\/$",
+			"dest": "_render"
+		}
+	]
+}
