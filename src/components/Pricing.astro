@@ -1,37 +1,18 @@
 ---
-const plans = [
-  {
-    name: 'Pro',
-    price: '300',
-    description: 'Ideal para negocios con volumen moderado de validaciones.',
-    validations: '400',
-    features: [
-      '400 validaciones SPEI al mes',
-      'Verificación contra Banxico en tiempo real',
-      'Extracción de datos con OCR',
-      'Historial de validaciones',
-      'Soporte prioritario',
-    ],
-    highlighted: false,
-    cta: 'Comenzar con Pro',
-  },
-  {
-    name: 'Business',
-    price: '500',
-    description: 'Para operaciones de alto volumen que requieren máxima capacidad.',
-    validations: '800',
-    features: [
-      '800 validaciones SPEI al mes',
-      'Verificación contra Banxico en tiempo real',
-      'Extracción de datos con OCR',
-      'Historial completo de validaciones',
-      'Exportar historial',
-      'Soporte prioritario 24/7',
-    ],
-    highlighted: true,
-    cta: 'Comenzar con Business',
-  },
-];
+import { apiFetch, ApiError } from '../lib/api';
+import type { Plan } from '../lib/types';
+
+let plans: Plan[] = [];
+let loadError: string | null = null;
+
+try {
+  plans = await apiFetch<Plan[]>('/plans');
+} catch (e) {
+  loadError = e instanceof ApiError ? e.message : 'No pudimos cargar los planes.';
+}
+
+const isLoggedIn = !!Astro.locals.user;
+const ctaHref = isLoggedIn ? '/checkout' : '/registro?return_to=%2Fcheckout';
 ---
 
 <section id="precios" class="relative py-24 sm:py-32">
@@ -44,78 +25,86 @@ const plans = [
         Paga lo que validas. Sin sorpresas.
       </h2>
       <p class="mt-4 text-white/55 text-lg">
-        Dos planes mensuales. Sin compromiso anual. Cancela cuando quieras.
+        Planes mensuales. Sin compromiso anual. Cancela cuando quieras.
       </p>
     </div>
 
+    {loadError && (
+      <div class="mb-6 max-w-2xl rounded-lg border border-red-500/30 bg-red-500/10 px-4 py-3 text-sm text-red-200">
+        {loadError}
+      </div>
+    )}
+
     <!-- Cards -->
     <div class="grid md:grid-cols-2 gap-5 max-w-4xl">
-      {plans.map((plan) => (
-        <div
-          class={`relative rounded-2xl p-8 sm:p-9 backdrop-blur-sm transition-colors ${
-            plan.highlighted
-              ? 'bg-brand-surface/80 border border-transparent'
-              : 'bg-brand-surface/60 border border-brand-line hover:border-white/15'
-          }`}
-        >
-          {plan.highlighted && (
-            <>
-              <span
-                aria-hidden="true"
-                class="absolute inset-0 rounded-2xl pointer-events-none"
-                style="background: linear-gradient(180deg, rgba(0,230,118,0.45) 0%, rgba(68,138,255,0.25) 30%, rgba(31,46,66,0.6) 70%); -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask-composite: exclude; padding: 1px;"
-              ></span>
-              <span class="absolute -top-3 left-8 font-mono text-[10px] uppercase tracking-[0.18em] px-2.5 py-1 rounded-md border border-brand-green/40 bg-brand-ink text-brand-green">
-                Recomendado
-              </span>
-            </>
-          )}
-
-          <!-- Plan name & description -->
-          <div class="mb-7">
-            <h3 class="font-display font-medium text-xl text-white">
-              {plan.name}
-            </h3>
-            <p class="mt-2 text-white/50 text-sm leading-relaxed">{plan.description}</p>
-          </div>
-
-          <!-- Price -->
-          <div class="mb-8">
-            <div class="flex items-baseline gap-2">
-              <span class="font-display font-medium text-6xl tracking-tightest text-white">
-                ${plan.price}
-              </span>
-              <span class="font-mono text-sm text-white/40">MXN / mes</span>
-            </div>
-            <p class="mt-2 font-mono text-[11px] uppercase tracking-wider text-white/35">
-              {plan.validations} validaciones / mes
-            </p>
-          </div>
-
-          <!-- Features -->
-          <ul class="space-y-3 mb-9">
-            {plan.features.map((feature) => (
-              <li class="flex items-start gap-3 text-sm text-white/70">
-                <svg
-                  class="w-4 h-4 flex-shrink-0 mt-0.5 text-brand-green"
-                  viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"
-                >
-                  <polyline points="4 11 8 15 16 6" />
-                </svg>
-                <span>{feature}</span>
-              </li>
-            ))}
-          </ul>
-
-          <!-- CTA -->
-          <a
-            href="#"
-            class={`${plan.highlighted ? 'btn-primary' : 'btn-ghost'} w-full`}
+      {plans.map((plan) => {
+        const highlighted = plan.slug === 'business';
+        return (
+          <div
+            class={`relative rounded-2xl p-8 sm:p-9 backdrop-blur-sm transition-colors ${
+              highlighted
+                ? 'bg-brand-surface/80 border border-transparent'
+                : 'bg-brand-surface/60 border border-brand-line hover:border-white/15'
+            }`}
           >
-            {plan.cta}
-          </a>
-        </div>
-      ))}
+            {highlighted && (
+              <>
+                <span
+                  aria-hidden="true"
+                  class="absolute inset-0 rounded-2xl pointer-events-none"
+                  style="background: linear-gradient(180deg, rgba(0,230,118,0.45) 0%, rgba(68,138,255,0.25) 30%, rgba(31,46,66,0.6) 70%); -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask-composite: exclude; padding: 1px;"
+                ></span>
+                <span class="absolute -top-3 left-8 font-mono text-[10px] uppercase tracking-[0.18em] px-2.5 py-1 rounded-md border border-brand-green/40 bg-brand-ink text-brand-green">
+                  Recomendado
+                </span>
+              </>
+            )}
+
+            <div class="mb-7">
+              <h3 class="font-display font-medium text-xl text-white">{plan.name}</h3>
+              <p class="mt-2 text-white/50 text-sm leading-relaxed">
+                {plan.validation_limit} validaciones SPEI cada mes con verificación oficial.
+              </p>
+            </div>
+
+            <div class="mb-8">
+              <div class="flex items-baseline gap-2">
+                <span class="font-display font-medium text-6xl tracking-tightest text-white">
+                  ${plan.formatted_price}
+                </span>
+                <span class="font-mono text-sm text-white/40">
+                  {plan.currency.toUpperCase()} / {plan.interval}
+                </span>
+              </div>
+              <p class="mt-2 font-mono text-[11px] uppercase tracking-wider text-white/35">
+                {plan.validation_limit} validaciones / mes
+              </p>
+            </div>
+
+            <ul class="space-y-3 mb-9">
+              {plan.features.map((feature) => (
+                <li class="flex items-start gap-3 text-sm text-white/70">
+                  <svg
+                    class="w-4 h-4 flex-shrink-0 mt-0.5 text-brand-green"
+                    viewBox="0 0 20 20" fill="none" stroke="currentColor"
+                    stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"
+                  >
+                    <polyline points="4 11 8 15 16 6" />
+                  </svg>
+                  <span>{feature}</span>
+                </li>
+              ))}
+            </ul>
+
+            <a
+              href={ctaHref}
+              class={`${highlighted ? 'btn-primary' : 'btn-ghost'} w-full`}
+            >
+              Comenzar con {plan.name}
+            </a>
+          </div>
+        );
+      })}
     </div>
 
     <p class="mt-10 font-mono text-[11px] uppercase tracking-wider text-white/30">
