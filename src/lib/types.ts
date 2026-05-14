@@ -17,6 +17,7 @@ export interface Plan {
   features: string[];
   formatted_price: string;
   active: boolean;
+  public: boolean;
   sort_order: number;
 }
 

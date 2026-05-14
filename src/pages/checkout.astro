@@ -13,7 +13,7 @@ let loadError: string | null = null;
 
 try {
   [plans, status] = await Promise.all([
-    apiFetch<Plan[]>('/plans'),
+    apiFetch<Plan[]>('/plans/all'),
     apiFetch<SubscriptionStatus>('/subscription/status', { token }),
   ]);
 } catch (e) {
@@ -43,7 +43,7 @@ try {
         </div>
       )}
 
-      <div class="grid md:grid-cols-2 gap-5 max-w-4xl mx-auto">
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-5 max-w-5xl mx-auto">
         {plans.map((plan) => {
           const isActive = status?.plan_slug === plan.slug && status?.subscribed;
           const isHighlighted = plan.slug === 'business';
@@ -66,14 +66,23 @@ try {
               <h3 class="font-display font-medium text-xl text-white">{plan.name}</h3>
 
               <div class="mt-5 mb-7">
-                <div class="flex items-baseline gap-2">
-                  <span class="font-display font-medium text-5xl tracking-tightest text-white">
-                    ${plan.formatted_price}
-                  </span>
-                  <span class="font-mono text-sm text-white/40">
-                    {plan.currency.toUpperCase()} / {plan.interval}
-                  </span>
-                </div>
+                {plan.price === 0 ? (
+                  <div class="flex items-baseline gap-2">
+                    <span class="font-display font-medium text-5xl tracking-tightest text-white">
+                      Gratis
+                    </span>
+                    <span class="font-mono text-sm text-white/40">/ {plan.interval}</span>
+                  </div>
+                ) : (
+                  <div class="flex items-baseline gap-2">
+                    <span class="font-display font-medium text-5xl tracking-tightest text-white">
+                      ${plan.formatted_price}
+                    </span>
+                    <span class="font-mono text-sm text-white/40">
+                      {plan.currency.toUpperCase()} / {plan.interval}
+                    </span>
+                  </div>
+                )}
                 <p class="mt-2 font-mono text-[11px] uppercase tracking-wider text-white/35">
                   {plan.validation_limit} validaciones / mes
                 </p>
